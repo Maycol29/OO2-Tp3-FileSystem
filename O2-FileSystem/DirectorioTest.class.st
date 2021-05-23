@@ -24,7 +24,8 @@ DirectorioTest >> setUp [
 	| date |
 	date := '2015-01-01'.
 	"Directorio vacío"
-	vacio := Directorio llamado: 'home' creadoEl: date .	"Directorio con un solo archivo"
+	vacio := Directorio llamado: 'home' creadoEl: date .
+	"Directorio con un solo archivo"
 	conUnArchivo := Directorio llamado: 'var' creadoEl: date.
 	config := Archivo llamado: 'config.bak' creadoEl: '2016-04-02' asDate kBytes: 128.
 	conUnArchivo agregar: config.	"Directorio con varios archivos, pero sin subdirectorios"
@@ -58,6 +59,13 @@ DirectorioTest >> setUp [
 						yourself)
 ]
 
+{ #category : #tests }
+DirectorioTest >> testAgregar [
+self assert:(vacio subdirectorios size) equals:0.
+self assert:(conUnArchivo subdirectorios size) equals:1.
+self assert:(conVariosArchivos subdirectorios size) equals:4.
+]
+
 { #category : #running }
 DirectorioTest >> testListadoDeContenido [
 	| listado listadoStream|
@@ -71,4 +79,11 @@ DirectorioTest >> testListadoDeContenido [
 	listadoStream << '/log/postgres (3 archivos)'.
 	listado := listadoStream contents.
 	self assert: conSubdirectorios listadoDeContenido = listado
+]
+
+{ #category : #tests }
+DirectorioTest >> testTamanoTotalOcupado [
+	self assert: vacio tamanoTotalOcupado equals: 32.
+	self assert: conUnArchivo tamanoTotalOcupado equals: 160.
+	self assert: conVariosArchivos tamanoTotalOcupado equals: 2010042.
 ]

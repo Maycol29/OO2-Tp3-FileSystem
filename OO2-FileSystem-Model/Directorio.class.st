@@ -36,17 +36,29 @@ Directorio >> archivoMasNuevo [
 filesystem contenido por directorio receptor."
 ]
 
+{ #category : #'as yet unclassified' }
+Directorio >> convertirDirectorioACollection [
+^subdirectorios  flatCollect:  [:topo | topo convertirDirectorioACollection ]
+]
+
 { #category : #initialization }
 Directorio >> initialize [ 
 subdirectorios:=OrderedCollection new.
 ]
 
 { #category : #accessing }
-Directorio >> kBytes [ 
-^32
+Directorio >> kBytes [
+	^self tamanoTotalOcupado 
+]
+
+{ #category : #accessing }
+Directorio >> subdirectorios [
+^subdirectorios 
 ]
 
 { #category : #'as yet unclassified' }
 Directorio >> tamanoTotalOcupado [
 "Retorna el espacio total ocupado en KB, incluyendo su contenido."
+^((subdirectorios sumNumbers: [:arch|arch kBytes ])+32)
+
 ]
