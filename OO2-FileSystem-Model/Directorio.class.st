@@ -27,6 +27,7 @@ Directorio >> archivoMasGrande [
 "Retorna el archivo con mayor cantidad de bytes en cualquier nivel del filesystem
 contenido por directorio receptor."
 
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -38,6 +39,11 @@ filesystem contenido por directorio receptor."
 { #category : #initialization }
 Directorio >> initialize [ 
 subdirectorios:=OrderedCollection new.
+]
+
+{ #category : #accessing }
+Directorio >> kBytes [ 
+^32
 ]
 
 { #category : #'as yet unclassified' }

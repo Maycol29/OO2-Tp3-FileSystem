@@ -16,6 +16,21 @@ instancia nombre:unString creadoEl:unaFecha .
 ^instancia
 ]
 
+{ #category : #accessing }
+Inclusion >> fechaCreacion [
+^fechaCreacion 
+]
+
+{ #category : #accessing }
+Inclusion >> kBytes [ 
+self subclassResponsibility.
+]
+
+{ #category : #accessing }
+Inclusion >> nombre [ 
+^nombre
+]
+
 { #category : #'as yet unclassified' }
 Inclusion >> nombre: unString creadoEl: unaFecha [
 nombre:=unString .

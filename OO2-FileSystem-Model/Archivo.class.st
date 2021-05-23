@@ -18,6 +18,11 @@ instancia kBytes:unNumero.
 ]
 
 { #category : #accessing }
+Archivo >> kBytes [
+^kBytes
+]
+
+{ #category : #accessing }
 Archivo >> kBytes:unNumero [
 kBytes :=unNumero
 ]
