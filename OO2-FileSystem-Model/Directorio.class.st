@@ -24,21 +24,17 @@ subdirectorios add:unArchivo.
 
 { #category : #'as yet unclassified' }
 Directorio >> archivoMasGrande [
-"Retorna el archivo con mayor cantidad de bytes en cualquier nivel del filesystem
-contenido por directorio receptor."
-
-
+^self porTamano last
 ]
 
 { #category : #'as yet unclassified' }
 Directorio >> archivoMasNuevo [
-"retorna el archivo con fecha de creacion más reciente en cualquier nivel del
-filesystem contenido por directorio receptor."
+^self porFecha last.
 ]
 
 { #category : #'as yet unclassified' }
 Directorio >> convertirDirectorioACollection [
-^subdirectorios  flatCollect:  [:topo | topo convertirDirectorioACollection ]
+^subdirectorios  flatCollect:  [:arch | arch convertirDirectorioACollection ]
 ]
 
 { #category : #initialization }
@@ -49,6 +45,18 @@ subdirectorios:=OrderedCollection new.
 { #category : #accessing }
 Directorio >> kBytes [
 	^self tamanoTotalOcupado 
+]
+
+{ #category : #'as yet unclassified' }
+Directorio >> porFecha [
+	^self convertirDirectorioACollection asSortedCollection: [ :each1 :each2 | 
+each1 fechaCreacion  <= each2 fechaCreacion ]
+]
+
+{ #category : #'as yet unclassified' }
+Directorio >> porTamano [
+	^(self convertirDirectorioACollection asSortedCollection: [ :each1 :each2 | 
+each1 kBytes  <= each2 kBytes ])
 ]
 
 { #category : #accessing }

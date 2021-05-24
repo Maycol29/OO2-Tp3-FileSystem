@@ -17,6 +17,11 @@ instancia kBytes:unNumero.
 ^instancia  
 ]
 
+{ #category : #'as yet unclassified' }
+Archivo >> convertirDirectorioACollection [
+	^ self asOrderedCollection
+]
+
 { #category : #accessing }
 Archivo >> kBytes [
 ^kBytes
