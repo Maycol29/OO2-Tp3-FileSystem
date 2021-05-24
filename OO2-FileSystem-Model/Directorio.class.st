@@ -32,9 +32,46 @@ Directorio >> archivoMasNuevo [
 ^self porFecha last.
 ]
 
+{ #category : #'as yet unclassified' }
+Directorio >> cantidadDeArchivosEnDir [
+	^ subdirectorios count: [ :elem | elem class = Archivo ]
+]
+
+{ #category : #'as yet unclassified' }
+Directorio >> cantidadDeArchivosEnDirEntero [
+	| carpetas |
+	carpetas := subdirectorios
+		collect: [ :elem | elem class = Directorio ].
+		
+	^ self cantidadDeArchivosEnDir + carpetas
+		do: [ :carp | carp cantidadDeArchivosEnDir ]
+]
+
+{ #category : #'private ' }
+Directorio >> contenido: aString [
+		^ (aString,'/',nombre) asString .
+]
+
 { #category : #'private ' }
 Directorio >> convertirDirectorioACollection [
 ^subdirectorios  flatCollect:  [:arch | arch convertirDirectorioACollection ]
+]
+
+{ #category : #'as yet unclassified' }
+Directorio >> hacerStream [
+	| aListadoStream cantArch |
+	aListadoStream := WriteStream on: String new.
+	cantArch := self cantidadDeArchivosEnDir.
+	cantArch > 0
+		ifTrue: [ aListadoStream
+				<< ((self contenido: '') , ' (' , cantArch asString , ' archivos)') asString ]
+		ifFalse: [ aListadoStream << (self contenido: '') asString ].
+	
+	subdirectorios
+		do: [ :elem | 
+			elem class = Directorio
+				ifTrue: [ elem hacerStream  ] ].
+	^ aListadoStream
 ]
 
 { #category : #initialization }
@@ -45,6 +82,11 @@ subdirectorios:=OrderedCollection new.
 { #category : #accessing }
 Directorio >> kBytes [
 	^self tamanoTotalOcupado 
+]
+
+{ #category : #'as yet unclassified' }
+Directorio >> listadoDeContenido [
+	^self hacerStream .
 ]
 
 { #category : #'private ' }
