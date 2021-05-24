@@ -22,7 +22,7 @@ DirectorioTest class >> llamado: nombre creadoEl: date [
 { #category : #running }
 DirectorioTest >> setUp [
 	| date |
-	date := '2015-01-01'.
+	date := '2019-01-01'.
 	"Directorio vacío"
 	vacio := Directorio llamado: 'home' creadoEl: date .
 	"Directorio con un solo archivo"
@@ -37,7 +37,7 @@ DirectorioTest >> setUp [
 		agregar: grande;
 		agregar: (Archivo llamado: 'mediano.tmp' creadoEl: '1995-11-23' asDate kBytes: 10000).	"Directorio con subdirectorios, archivos, y archivos dentro de los subdirectorios"
 	conSubdirectorios := Directorio llamado: 'log' creadoEl: date.
-	backup2015 := Archivo llamado: '2015.zip' creadoEl: '2016-04-06' asDate kBytes: 240000000.
+	backup2015 := Archivo llamado: '2015.zip' creadoEl: date asDate kBytes: 240000000.
 	conSubdirectorios
 		agregar: (Archivo llamado: 'sys.log' creadoEl: '2016-03-03' asDate kBytes: 90000);
 		agregar:
@@ -64,6 +64,19 @@ DirectorioTest >> testAgregar [
 self assert:(vacio subdirectorios size) equals:0.
 self assert:(conUnArchivo subdirectorios size) equals:1.
 self assert:(conVariosArchivos subdirectorios size) equals:4.
+]
+
+{ #category : #tests }
+DirectorioTest >> testArchivoMasGrande [
+self assert:conVariosArchivos archivoMasGrande equals:grande.
+self assert:conSubdirectorios archivoMasGrande equals:backup2015.
+
+
+]
+
+{ #category : #tests }
+DirectorioTest >> testArchivoMasNuevo [
+	self assert:(conVariosArchivos archivoMasNuevo = grande).
 ]
 
 { #category : #running }
