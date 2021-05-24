@@ -79,6 +79,17 @@ DirectorioTest >> testArchivoMasNuevo [
 	self assert:(conVariosArchivos archivoMasNuevo = grande).
 ]
 
+{ #category : #tests }
+DirectorioTest >> testConvertirDirectorioACollection [
+	self
+		assert: (conVariosArchivos convertirDirectorioACollection includes: grande).
+	self
+		assert: conVariosArchivos convertirDirectorioACollection size
+		equals: 4.
+	self
+		assert: (conUnArchivo convertirDirectorioACollection includes: config)
+]
+
 { #category : #running }
 DirectorioTest >> testListadoDeContenido [
 	| listado listadoStream|
