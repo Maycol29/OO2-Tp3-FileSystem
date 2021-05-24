@@ -17,22 +17,22 @@ instancia :=super llamado: unString  creadoEl: unaFecha.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Directorio >> agregar:unArchivo [
 subdirectorios add:unArchivo.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Directorio >> archivoMasGrande [
 ^self porTamano last
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Directorio >> archivoMasNuevo [
 ^self porFecha last.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private ' }
 Directorio >> convertirDirectorioACollection [
 ^subdirectorios  flatCollect:  [:arch | arch convertirDirectorioACollection ]
 ]
@@ -47,13 +47,13 @@ Directorio >> kBytes [
 	^self tamanoTotalOcupado 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private ' }
 Directorio >> porFecha [
 	^self convertirDirectorioACollection asSortedCollection: [ :each1 :each2 | 
 each1 fechaCreacion  <= each2 fechaCreacion ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private ' }
 Directorio >> porTamano [
 	^(self convertirDirectorioACollection asSortedCollection: [ :each1 :each2 | 
 each1 kBytes  <= each2 kBytes ])
@@ -64,7 +64,7 @@ Directorio >> subdirectorios [
 ^subdirectorios 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Directorio >> tamanoTotalOcupado [
 "Retorna el espacio total ocupado en KB, incluyendo su contenido."
 ^((subdirectorios sumNumbers: [:arch|arch kBytes ])+32)

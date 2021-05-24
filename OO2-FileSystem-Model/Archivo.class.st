@@ -17,7 +17,7 @@ instancia kBytes:unNumero.
 ^instancia  
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 Archivo >> convertirDirectorioACollection [
 	^ self asOrderedCollection
 ]

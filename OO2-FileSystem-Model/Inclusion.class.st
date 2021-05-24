@@ -31,7 +31,7 @@ Inclusion >> nombre [
 ^nombre
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Inclusion >> nombre: unString creadoEl: unaFecha [
 nombre:=unString .
 fechaCreacion :=unaFecha .
